@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import faker from 'faker';
 import Colors from '../styles/colors';
 import { ActionCheckCircle } from 'material-ui/svg-icons';
 import { Paper, Divider, Dialog, FlatButton } from 'material-ui';
@@ -107,10 +108,10 @@ export default class Splash extends Component {
         });
         const formData = this.createFormData(email, this.props.location.refcode)
         // if added to Mailchimp, then add user to Waitlisted.co list
-        let createReservation = fetch(`https://commandiv.app.waitlisted.co/api/v1/reservation`, extend(options, { body: formData, method: 'GET' }));
+        let createReservation = fetch(`${process.env.REACT_APP_WAITLISTED_DOMAIN}/api/v1/reservation`, extend(options, { body: formData, method: 'GET' }));
         createReservation.then(res => res.json()).then((rsvp) => {
           console.log('RESERVATION', rsvp);
-          const referralLink = `http://commandiv.com?refcode=${rsvp.reservation.affiliate}`;
+          const referralLink = `${process.env.REACT_APP_ROOT_URL}?refcode=${rsvp.reservation.affiliate}`;
           this.showModal(rsvp, referralLink);
           this.sendWelcomeEmail(email, referralLink);
           // if user was referred, give points to referrer and referree
@@ -135,7 +136,7 @@ export default class Splash extends Component {
         if (res.error === 'Member Exists') {
           this.waitlisted.position(email).then((rsvp) => {
             console.log('RESERVATION', rsvp);
-            const referralLink = `http://commandiv.com?refcode=${rsvp.reservation.affiliate}`;
+            const referralLink = `${process.env.REACT_APP_ROOT_URL}?refcode=${rsvp.reservation.affiliate}`;
             this.showModal(rsvp, referralLink)
             // this.sendWelcomeEmail(email, referralLink);
           });
@@ -186,14 +187,14 @@ export default class Splash extends Component {
             <img src="/static/images/invest-2.png" alt="investment advice" style={{ width: '100%' }}/>
           </Paper>
           <div className="splash-description-section">
-            <h2 className="splash-description-h2">Smart, personalized investment recommendations</h2>
-            <p className="splash-description-p">Commandiv makes it easy for you to buy the right investments in the right proportions.  We do all the hard portfolio math to build you a list of recommended trades in real time.  These trades help you achieve your target portfolio.</p>
+            <h2 className="splash-description-h2">{faker.lorem.sentence()}</h2>
+            <p className="splash-description-p">{faker.lorem.sentences(2)}</p>
           </div>
         </section>
         <section className="flex-container m-x-1" style={{ justifyContent: 'space-between' }}>
           <div className="splash-description-section">
-            <h2 className="splash-description-h2">Customize your portfolio.  One size doesn’t fit all.</h2>
-            <p className="splash-description-p">You can customize exactly how you want your investment portfolio to look.  Choose the strategies that make up your portfolio, or let us recommend a personalized mix for you.</p>
+            <h2 className="splash-description-h2">{faker.lorem.sentence()}</h2>
+            <p className="splash-description-p">{faker.lorem.sentences(2)}</p>
           </div>
           <Paper className="landing-paper hidden-sm-down lower" zDepth={4} rounded={false}>
             <img src="/static/images/invest-3.png" alt="investment advice" style={{ width: '100%' }}/>
@@ -204,8 +205,8 @@ export default class Splash extends Component {
             <img src="/static/images/invest-4.png" alt="investment advice" style={{ width: '100%' }}/>
           </Paper>
           <div className="splash-description-section">
-            <h2 className="splash-description-h2">Buy any stock... for zero commissions</h2>
-            <p className="splash-description-p">Want to invest in Google (GOOGL)?  Fitbit (FIT)?  Buy any stock you like and pay $0 in commissions.  Make as many active investments in US equities & ETFs as you like, and we’ll adjust your trade recommendations appropriately.</p>
+            <h2 className="splash-description-h2">{faker.lorem.sentence()}</h2>
+            <p className="splash-description-p">{faker.lorem.sentences(2)}</p>
           </div>
         </section>
       </div>
@@ -375,9 +376,9 @@ export default class Splash extends Component {
         <style jsx>{buttonStyles}</style>
         <style jsx>{footerStyles}</style>
         <section className="splash-header">
-          <h2 className="splash-lead">Commandiv: smarter stock-trading with recommendations</h2>
+          <h2 className="splash-lead">{faker.lorem.sentence()}</h2>
           <p className="signup-description">
-            Invest like a hedge fund manager – without quitting your day job
+            {faker.lorem.sentence()}
           </p>
           {this.renderSignupInput(1)}
         </section>
