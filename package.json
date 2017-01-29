@@ -9,6 +9,14 @@
   "author": "tgoldenberg",
   "license": "ISC",
   "dependencies": {
-    "next": "^1.2.3"
+    "lodash": "^4.17.4",
+    "material-ui": "^0.16.7",
+    "next": "^1.2.3",
+    "react-ga": "^2.1.2",
+    "react-redux": "^5.0.2",
+    "react-social-icons": "^2.5.1",
+    "react-tap-event-plugin": "^2.0.1",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0"
   }
 }

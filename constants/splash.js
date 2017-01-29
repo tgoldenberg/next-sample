@@ -1,0 +1,1 @@
+export const SET_SPLASH_USER = 'SET_SPLASH_USER';
